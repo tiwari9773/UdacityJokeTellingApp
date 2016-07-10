@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.JavaJokes;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -29,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEntertainMe(View v) {
-        Toast.makeText(MainActivity.this, "Free Version", Toast.LENGTH_SHORT).show();
+
+        JavaJokes j = new JavaJokes();
+        Toast.makeText(MainActivity.this, "Free Version"+j.getJoke(), Toast.LENGTH_SHORT).show();
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(myDeviceId).build();
         mAdView.loadAd(adRequest);
