@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UdacityJokeTellingApp</string>
+
+    <string name="welcome_message">Welcome Joke</string>
+    <string name="product_flavor_heading">Product Flavor:</string>
+    <string name="product_flavor_name" />
+    <string name="joke">Sorry, I don\'t have a joke for you.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
