@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="joke">This is a super cheesy joke.</string>
+    <string name="app_id">ca-app-pub-5232385251947282~4222437854</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5232385251947282/7815032656</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-5232385251947282/5699171057</string>
 </resources>

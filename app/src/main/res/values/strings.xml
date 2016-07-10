@@ -7,5 +7,6 @@
     <string name="joke">Sorry, I don\'t have a joke for you.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_entertain_me">Entertain Me</string>
+    <string name="btn_double_entertain_me">Double Entertain Me</string>
 </resources>

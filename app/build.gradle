@@ -30,9 +30,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
+
+    freeCompile 'com.google.firebase:firebase-core:9.2.0'
+    freeCompile 'com.google.firebase:firebase-ads:9.2.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
