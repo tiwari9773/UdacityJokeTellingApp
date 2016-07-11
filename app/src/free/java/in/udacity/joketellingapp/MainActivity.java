@@ -1,5 +1,6 @@
 package in.udacity.joketellingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+
+import in.udacity.jokedisplaylibrary.JokeDisplayActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public void onEntertainMe(View v) {
 
         JavaJokes j = new JavaJokes();
-        Toast.makeText(MainActivity.this, "Free Version"+j.getJoke(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Free Version" + j.getJoke(), Toast.LENGTH_SHORT).show();
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(myDeviceId).build();
         mAdView.loadAd(adRequest);
@@ -88,7 +91,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdClosed() {
                 Toast.makeText(MainActivity.this, "Continue Joke Version", Toast.LENGTH_SHORT).show();
+
                 requestNewInterstitial();
+
+                Intent in = new Intent(MainActivity.this, JokeDisplayActivity.class);
+                startActivity(in);
             }
         });
 

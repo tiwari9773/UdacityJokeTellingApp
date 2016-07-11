@@ -1,1 +1,1 @@
-include ':app', ':jokebyjava'
+include ':app', ':jokebyjava', ':jokedisplaylibrary'
