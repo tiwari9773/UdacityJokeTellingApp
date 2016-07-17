@@ -6,6 +6,7 @@
 
 package com.example.Lokesh.myapplication.backend;
 
+import com.example.JavaJokes;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -33,9 +34,9 @@ public class MyEndpoint {
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
 
-//        JavaJokes javaJokes = new JavaJokes();
-//        response.setData("Hi, " + javaJokes.getJoke());
-        response.setData("Hi, " + name);
+        JavaJokes javaJokes = new JavaJokes();
+        response.setData("Hi, " + javaJokes.getJoke());
+//        response.setData("Hi, " + name);
 
         return response;
     }

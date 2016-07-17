@@ -1,11 +1,13 @@
 package com.example;
 
+import java.util.Random;
+
 public class JavaJokes {
 
     public String getJoke() {
-        double i = Math.random();
-        int j = (int) (i / 5);
-        switch (j) {
+        Random r = new Random();
+        int joke = r.nextInt(4);
+        switch (joke) {
             case 0:
                 return "0";
             case 1:
