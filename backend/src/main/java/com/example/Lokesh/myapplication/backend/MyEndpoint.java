@@ -35,7 +35,7 @@ public class MyEndpoint {
         MyBean response = new MyBean();
 
         JavaJokes javaJokes = new JavaJokes();
-        response.setData("Hi, " + javaJokes.getJoke());
+        response.setData(javaJokes.getJoke());
 //        response.setData("Hi, " + name);
 
         return response;
