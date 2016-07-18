@@ -1,9 +1,6 @@
-package in.udacity.joketellingapp.free;
+package in.udacity.joketellingapp;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Pair;
-import android.widget.Toast;
 
 import com.example.lokesh.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -16,9 +13,8 @@ import java.io.IOException;
 /**
  * Created by Lokesh on 18-07-2016.
  */
-public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
     private InterfaceDeliverJoke onDeliverJoke;
 
     public EndpointsAsyncTask(InterfaceDeliverJoke onDeliverJoke) {
@@ -26,7 +22,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     }
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Void... params) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -46,11 +42,8 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
-
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.sayHi("").execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }

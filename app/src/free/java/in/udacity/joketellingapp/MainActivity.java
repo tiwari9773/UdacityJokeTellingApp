@@ -16,8 +16,8 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
 import in.udacity.jokedisplaylibrary.JokeDisplayActivity;
-import in.udacity.joketellingapp.free.EndpointsAsyncTask;
-import in.udacity.joketellingapp.free.InterfaceDeliverJoke;
+import in.udacity.joketellingapp.EndpointsAsyncTask;
+import in.udacity.joketellingapp.InterfaceDeliverJoke;
 
 
 public class MainActivity extends AppCompatActivity {

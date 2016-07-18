@@ -1,4 +1,4 @@
-package in.udacity.joketellingapp.free;
+package in.udacity.joketellingapp;
 
 /**
  * Created by Lokesh on 18-07-2016.
