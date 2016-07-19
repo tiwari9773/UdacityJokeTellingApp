@@ -22,3 +22,14 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+project(':backend') {
+    task startGCE {
+        dependsOn "appengineRun"
+        dependsOn "test"
+        dependsOn "appengineStop"
+        doLast {
+            println "execution Done"
+        }
+    }
+}

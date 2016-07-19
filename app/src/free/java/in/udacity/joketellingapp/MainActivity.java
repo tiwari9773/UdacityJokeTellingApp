@@ -1,5 +1,6 @@
 package in.udacity.joketellingapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.JavaJokes;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -16,11 +16,15 @@ import com.google.android.gms.ads.MobileAds;
 
 import in.udacity.jokedisplaylibrary.JokeDisplayActivity;
 
+
 public class MainActivity extends AppCompatActivity {
 
     InterstitialAd mInterstitialAd;
     String myDeviceId = "a2d4e48351680159";
     Handler handler;
+    private final String default_joke = "default-joke";
+    private String strJoke = default_joke;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         handler = new Handler();
+        new EndpointsAsyncTask(onDeliverJoke).execute();
+
         /*Initialization of App Advertisement*/
         MobileAds.initialize(getApplicationContext(), getString(R.string.app_id));
+        requestNewInterstitial();
     }
 
     public void onEntertainMe(View v) {
 
-        JavaJokes j = new JavaJokes();
-        Toast.makeText(MainActivity.this, "Free Version" + j.getJoke(), Toast.LENGTH_SHORT).show();
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(myDeviceId).build();
         mAdView.loadAd(adRequest);
@@ -84,40 +89,71 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onDoubleEntertainMe(View v) {
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
-
+        dialog = new ProgressDialog(this);
+        dialog = ProgressDialog.show(this, getString(R.string.mg_while_fetching), "Few Seconds More", true);
+        new EndpointsAsyncTask(onDeliverJoke).execute();
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
-                Toast.makeText(MainActivity.this, "Continue Joke Version", Toast.LENGTH_SHORT).show();
 
-                requestNewInterstitial();
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
 
                 Intent in = new Intent(MainActivity.this, JokeDisplayActivity.class);
+                in.putExtra("joke", strJoke);
+
+                 /*ResetJoke*/
+                strJoke = default_joke;
+
                 startActivity(in);
             }
         });
 
-        requestNewInterstitial();
-
-        handler.postDelayed(runnable, 5000);
-
+        handler.post(runnable);
     }
+
+    InterfaceDeliverJoke onDeliverJoke = new InterfaceDeliverJoke() {
+        @Override
+        public void onDeliver(String joke) {
+            strJoke = joke;
+        }
+    };
 
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if (mInterstitialAd.isLoaded()) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
                 mInterstitialAd.show();
             } else {
-                handler.postDelayed(runnable, 5000);
-                Toast.makeText(MainActivity.this, "Delay", Toast.LENGTH_SHORT).show();
+                if (!strJoke.equalsIgnoreCase(default_joke)) {
+
+                    if (dialog != null) {
+                        dialog.dismiss();
+                    }
+
+                    Intent in = new Intent(MainActivity.this, JokeDisplayActivity.class);
+                    in.putExtra("joke", strJoke);
+
+                    /*ResetJoke*/
+                    strJoke = default_joke;
+                    startActivity(in);
+                } else {
+                    handler.postDelayed(runnable, 5000);
+                    Toast.makeText(MainActivity.this, "Delay", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     };
 
     private void requestNewInterstitial() {
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(myDeviceId)
                 .build();

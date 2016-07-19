@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/frag_container"
-        android:name="in.udacity.joketellingapp.free.MainSharedFragment"
+        android:name="in.udacity.joketellingapp.MainSharedFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

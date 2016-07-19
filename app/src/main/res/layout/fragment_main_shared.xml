@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/test"
-    tools:context="in.udacity.joketellingapp.free.MainSharedFragment">
+    tools:context="in.udacity.joketellingapp.MainSharedFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <Button
