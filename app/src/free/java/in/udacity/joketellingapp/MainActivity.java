@@ -141,9 +141,10 @@ public class MainActivity extends AppCompatActivity {
                     /*ResetJoke*/
                     strJoke = default_joke;
                     startActivity(in);
+                } else {
+                    handler.postDelayed(runnable, 5000);
+                    Toast.makeText(MainActivity.this, "Delay", Toast.LENGTH_SHORT).show();
                 }
-                handler.postDelayed(runnable, 5000);
-                Toast.makeText(MainActivity.this, "Delay", Toast.LENGTH_SHORT).show();
             }
         }
     };
