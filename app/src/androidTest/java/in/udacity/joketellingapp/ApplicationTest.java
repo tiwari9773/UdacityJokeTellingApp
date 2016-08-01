@@ -34,6 +34,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             @Override
             public void onDeliver(String joke) {
                 jokeString = joke;
+                signal.countDown();
             }
         });
         task.execute();
