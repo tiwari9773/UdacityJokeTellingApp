@@ -40,7 +40,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         task.execute();
         signal.await();
 
-        assertNull(jokeString);
+        assertNotNull(jokeString);
         assertFalse(TextUtils.isEmpty(jokeString));
 
     }
